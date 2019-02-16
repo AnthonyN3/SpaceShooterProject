@@ -14,19 +14,26 @@ public class Player : MonoBehaviour
     public float gameRestartDelay = 2f;
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
+    public Weapon[] weapons;
 
     [Header("Set Dynamically")]
     [SerializeField]
     private float  _shieldLevel1 = 1; //remember the underscore
     private GameObject lastTriggerGo = null;    //This variable holds a reference to the last triggering GameObject
+    public delegate void WeaponFireDelegate();
+    public WeaponFireDelegate fireDelegate;
 
-    void Awake()
+    void Start()
     {   
         //If there are 2 heros with this script, and it tries to assign S to another instance
         //of Hero, then it will cause an error (because we only want once instance of hero, hence the use of Singelton S)
         if(S == null)
         {
             S = this;
+
+            //Reset the weapons to start _Player with 1 blaster
+            ClearWeapons();
+            weapons[0].SetType(WeaponType.blaster);
         } else
         {
             Debug.LogError("Player.Awake() - Attempted to assign seecond Player.S!");
@@ -48,27 +55,32 @@ public class Player : MonoBehaviour
         //Rotate the ship to make it feel more dynamic
         transform.rotation = Quaternion.Euler(yAxis*pitchMult, xAxis*rollMult,0);
 
-        //Allow the ship to fire
-        if( Input.GetKey( KeyCode.Space) )
+        if (Input.GetAxis("Jump") == 1 && fireDelegate != null) 
         {
-            TempFire();
+            fireDelegate(); 
         }
 
-        void TempFire()
-        {
-            GameObject projGO = Instantiate<GameObject>(projectilePrefab);
-            projGO.transform.position = transform.position;
-            Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
-            rigidB.velocity = Vector3.up*projectileSpeed;
-        }
     }
+
+    void TempFire()
+    {
+        GameObject projGO = Instantiate<GameObject>(projectilePrefab);
+        projGO.transform.position = transform.position;
+        Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+        
+        Projectile proj = projGO.GetComponent<Projectile>();
+        proj.type = WeaponType.blaster;
+        float tSpeed = Main.GetWeaponDefinition( proj.type ).velocity;
+        rigidB.velocity = Vector3.up * tSpeed;
+
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
-        //print("Triggered" + go.name);
-
+        
         //Make sure it's not the same triggering "go"(GameObject variable name) as last time (since the "Enemy" object contains nested objects)
         //So when a wing or the sphere of the plane is triggered it doesnt register it has two seperate triggers causing you to loose 2 shields a time... 
         if(go == lastTriggerGo)
@@ -82,11 +94,47 @@ public class Player : MonoBehaviour
             shieldLevel1--; //decreases the level of the shield by 1
             Destroy(go);    // destroys the enemy gameObject after it makes contact with hero
         } 
+        else if(go.tag == "PowerUp")
+        {
+            //if this shield was triggered by a PowerUp
+            AbsorbPowerUp(go);
+        }
         else
         {
             print("Triggered by non Enemy: " +go.name);
         }
     }
+
+    public void AbsorbPowerUp(GameObject go)
+    {
+        PowerUp pu = go.GetComponent<PowerUp>();
+
+        switch(pu.type)
+        {
+            case WeaponType.shield: 
+                shieldLevel1++;
+            break;
+            
+            default: 
+                if (pu.type == weapons[0].type) 
+                { // If it is the same type 
+                    Weapon w = GetEmptyWeaponSlot();
+                    if (w != null) 
+                    {
+                        // Set it to pu.type
+                        w.SetType(pu.type);
+                    }
+                } 
+                else
+                { // If this is a different weapon type 
+                    ClearWeapons();
+                    weapons[0].SetType(pu.type);
+                }
+            break;
+        }
+        pu.AbsorbedBy(this.gameObject);
+    }
+
 
     public float shieldLevel1
     {
@@ -108,4 +156,24 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    Weapon GetEmptyWeaponSlot() 
+    {
+        for (int i=0; i<weapons.Length; i++) 
+        {
+            if ( weapons[i].type == WeaponType.none ) 
+            {
+                return( weapons[i] );
+            }
+        }
+        return( null );
+    }
+    void ClearWeapons() 
+    {
+        foreach (Weapon w in weapons) 
+        {
+            w.SetType(WeaponType.none);
+        }
+    }
+
 }

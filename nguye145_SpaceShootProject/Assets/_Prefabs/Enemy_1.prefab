@@ -156,8 +156,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  hleath: 10
+  health: 10
   score: 100
+  showDamageDuration: 0.1
+  powerUpDropChance: 0.5
+  originalColors: []
+  materials: []
+  showingDamage: 0
+  damageDoneTime: 0
+  notifiedOfDestruction: 0
   waveFrequency: 2
   waveWidth: 4
   waveRotY: 45
