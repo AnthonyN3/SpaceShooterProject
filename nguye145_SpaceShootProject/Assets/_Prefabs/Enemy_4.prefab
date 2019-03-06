@@ -444,7 +444,7 @@ MonoBehaviour:
   damageDoneTime: 0
   notifiedOfDestruction: 0
   parts:
-  - name: Cockpit
+  - name: CockPit
     health: 10
     protectedBy:
     - Fuselage
