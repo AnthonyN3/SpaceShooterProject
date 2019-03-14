@@ -9,8 +9,9 @@ public class pause : MonoBehaviour
 
     public GameObject pauseCanvas;
 
-    void Start () {
-	paused = false;
+    void Start () 
+	{
+		paused = false;
 	}
 	
 

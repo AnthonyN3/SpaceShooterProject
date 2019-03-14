@@ -49,7 +49,7 @@ public class Main : MonoBehaviour
         //Set bndCheck to reference the BoundsCheck component on this gameObject(on the camera)
         bndCheck = GetComponent<BoundsCheck>();
 
-        //Invoke SpawnEnemy() once (in 2 seconds, based on defailt vales)
+        //Invoke SpawnEnemy() once (in 2 seconds, based on default vales)
         Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
 
         //A generic Dictionary with WeaponType as the key
