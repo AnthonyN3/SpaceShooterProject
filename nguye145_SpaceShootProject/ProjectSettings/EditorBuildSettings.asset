@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: bed79d028c7ff71478b02b0f2ad0016b
+  - enabled: 1
+    path: Assets/Scenes/BronzeLevel.unity
+    guid: 7c9ab2e2d934390498c6d7ff0f52fccf
   m_configObjects: {}

@@ -9,10 +9,18 @@ public class BacgroundMusic : MonoBehaviour
 
     void Awake()
     {   
+        GameObject[] musicObject = GameObject.FindGameObjectsWithTag("music");
 
-        
+        if(musicObject.Length > 1)
+            Destroy(gameObject);
+
         //We need background music to be played between scenes
         DontDestroyOnLoad(this.gameObject); 
+    }
+
+    void Start()
+    {
+        Music(0);
     }
 
     public void Music(int musicIndex)
