@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BacgroundMusic : MonoBehaviour
+public class BackgroundMusic : MonoBehaviour
 {
     public AudioClip[] clips;
     public AudioSource musicSource;
@@ -20,11 +20,12 @@ public class BacgroundMusic : MonoBehaviour
 
     void Start()
     {
-        Music(0);
+        ChangeMusic(0);//Default music
     }
 
-    public void Music(int musicIndex)
+    public void ChangeMusic(int musicIndex)
     {
+        //musicSource.Stop();
         musicSource.clip = clips[musicIndex];
         musicSource.Play();
     }
