@@ -21,13 +21,15 @@ public class Enemy : MonoBehaviour
 
     protected BoundsCheck bndCheck;
 
+    private Color currentColor;
+
     void Awake()
     {
        bndCheck = GetComponent<BoundsCheck>();
 
         //This is used to find what type of Enemy is being instantiated and its
         //corresponding colour the user chose
-        Color currentColor = Color.white;
+        currentColor = Color.white;
         if(gameObject.name == "Enemy_0(Clone)")
         {
             currentColor = Data.enemyColor[0];
@@ -158,7 +160,7 @@ public class Enemy : MonoBehaviour
 
         foreach(var renderer in gameObject.GetComponentsInChildren<Renderer>() )
         {
-            renderer.material.color = Color.blue;
+            renderer.material.color = currentColor;
         }
         showingDamage = false;
 
