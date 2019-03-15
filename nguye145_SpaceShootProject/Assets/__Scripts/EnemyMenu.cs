@@ -75,61 +75,61 @@ public class EnemyMenu : MonoBehaviour
     public void ColorEnemy0(int value)
     {   
         if(value == 0)
-            Data.enemyColor[0] = "white";
+            Data.enemyColor[0] = Color.white;
         else if(value == 1)
-            Data.enemyColor[0] = "red";
+            Data.enemyColor[0] = Color.red;
         else if(value == 2)
-            Data.enemyColor[0] = "green";
+            Data.enemyColor[0] = Color.green;
         else if(value == 3)
-            Data.enemyColor[0] = "blue";
+            Data.enemyColor[0] = Color.blue;
     }
 
     public void ColorEnemy1(int value)
     {   
         if(value == 0)
-            Data.enemyColor[1] = "white";
+            Data.enemyColor[1] = Color.white;
         else if(value == 1)
-            Data.enemyColor[1] = "red";
+            Data.enemyColor[1] = Color.red;
         else if(value == 2)
-            Data.enemyColor[1] = "green";
+            Data.enemyColor[1] = Color.green;
         else if(value == 3)
-            Data.enemyColor[1] = "blue";
+            Data.enemyColor[1] = Color.blue;
     }
 
     public void ColorEnemy2(int value)
     {   
         if(value == 0)
-            Data.enemyColor[2] = "white";
+            Data.enemyColor[2] = Color.white;
         else if(value == 1)
-            Data.enemyColor[2] = "red";
+            Data.enemyColor[2] = Color.red;
         else if(value == 2)
-            Data.enemyColor[2] = "green";
+            Data.enemyColor[2] = Color.green;
         else if(value == 3)
-            Data.enemyColor[2] = "blue";
+            Data.enemyColor[2] = Color.blue;
     }
 
     public void ColorEnemy3(int value)
     {   
         if(value == 0)
-            Data.enemyColor[3] = "white";
+            Data.enemyColor[3] = Color.white;
         else if(value == 1)
-            Data.enemyColor[3] = "red";
+            Data.enemyColor[3] = Color.red;
         else if(value == 2)
-            Data.enemyColor[3] = "green";
+            Data.enemyColor[3] = Color.green;
         else if(value == 3)
-            Data.enemyColor[3] = "blue";
+            Data.enemyColor[3] = Color.blue;
     }
 
     public void ColorEnemy4(int value)
     {   
         if(value == 0)
-            Data.enemyColor[4] = "white";
+            Data.enemyColor[4] = Color.white;
         else if(value == 1)
-            Data.enemyColor[4] = "red";
+            Data.enemyColor[4] = Color.red;
         else if(value == 2)
-            Data.enemyColor[4] = "green";
+            Data.enemyColor[4] = Color.green;
         else if(value == 3)
-            Data.enemyColor[4] = "blue";
+            Data.enemyColor[4] = Color.blue;
     }
 
 }

@@ -13,7 +13,7 @@ public static class Data
     //Stores the types of enemies for each level (Levels: Bronze, Silver, and gold)
     //index[0] == Enemy_0 , index[1] == Enemy_1... etc
     public static bool [] isEnemyBronze = {true,true,true,false,false};
-    public static bool [] isEnemySilver = {true,true,true,false,true};
+    public static bool [] isEnemySilver = {true,true,true,true,false};
     public static bool [] isEnemyGold = {true,true,true,true,true};
 
     //Stores score limit need to complete each level
@@ -22,7 +22,7 @@ public static class Data
  
     //Stores the score gained for the destruction of each enemy (enemy 0,1,2,3 and 4)
     public static int [] pointsPerEnemy = {5,10,15,20,25};
-    public static string [] enemyColor = {"white","white","white","white","white"};
-
+    //public static string [] enemyColor = {"white","white","white","white","white"};
+    public static Color [] enemyColor = {Color.white, Color.white, Color.white, Color.white, Color.white};
 
 }

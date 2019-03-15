@@ -130,50 +130,64 @@ public class Enemy_4 : Enemy
             case "ProjectilePlayer":
                 Projectile p = other.GetComponent<Projectile>();
                 // If this Enemy is off screen, don't damage it.
-                if ( !bndCheck.isOnScreen ) {
-                Destroy( other );
-                break;
+                if ( !bndCheck.isOnScreen ) 
+                {
+                    Destroy( other );
+                    break;
                 }
+                
                 // Hurt this Enemy
                 GameObject goHit = coll.contacts[0].thisCollider.gameObject;
                 Part prtHit = FindPart(goHit);
-                if (prtHit == null) { // If prtHit wasn't found…
-                goHit = coll.contacts[0].otherCollider.gameObject;
-                prtHit = FindPart(goHit);
+                if (prtHit == null) 
+                { // If prtHit wasn't found…
+                    goHit = coll.contacts[0].otherCollider.gameObject;
+                    prtHit = FindPart(goHit);
                 }
+
                 // Check whether this part is still protected
-                if (prtHit.protectedBy != null) { 
-                foreach( string s in prtHit.protectedBy ) {
-                // If one of the protecting parts hasn't been destroyed...
-                if (!Destroyed(s)) {
-                // ...then don't damage this part yet
-                Destroy(other); // Destroy the ProjectileHero
-                return; // return before damaging Enemy_4
-                }
-                }
+                if (prtHit.protectedBy != null) 
+                { 
+                    foreach( string s in prtHit.protectedBy ) 
+                    {
+                        // If one of the protecting parts hasn't been destroyed...
+                        if (!Destroyed(s)) 
+                        {
+                            // ...then don't damage this part yet
+                            Destroy(other); // Destroy the ProjectileHero
+                            return; // return before damaging Enemy_4
+                        }
+                    }
                 }
                 // It's not protected, so make it take damage
                 // Get the damage amount from the Projectile.type and Main.W_DEFS
                 prtHit.health -= Main.GetWeaponDefinition( p.type ).damageOnHit;
+                
                 // Show damage on the part
                 ShowLocalizedDamage(prtHit.mat);
-                if (prtHit.health <= 0) { 
-                // Instead of destroying this enemy, disable the damaged part
-                prtHit.go.SetActive(false);
+                if (prtHit.health <= 0) 
+                { 
+                    // Instead of destroying this enemy, disable the damaged part
+                    prtHit.go.SetActive(false);
                 }
+                
                 // Check to see if the whole ship is destroyed
                 bool allDestroyed = true; // Assume it is destroyed
-                foreach( Part prt in parts ) {
-                if (!Destroyed(prt)) { // If a part still exists...
-                allDestroyed = false; // ...change allDestroyed to false
-                break; // & break out of the foreach loop
+                foreach( Part prt in parts ) 
+                {
+                    if (!Destroyed(prt)) 
+                    {   // If a part still exists...
+                        allDestroyed = false; // ...change allDestroyed to false
+                        break; // & break out of the foreach loop
+                    }
                 }
-                }
-                if (allDestroyed) { // If it IS completely destroyed...
-                // ...tell the Main singleton that this ship was destroyed
-                Main.S.ShipDestroyed( this );
-                // Destroy this Enemy
-                Destroy(this.gameObject);
+                
+                if (allDestroyed) 
+                {   // If it IS completely destroyed...
+                    // ...tell the Main singleton that this ship was destroyed
+                    Main.S.ShipDestroyed( this );
+                    // Destroy this Enemy
+                    Destroy(this.gameObject);
                 }
                 Destroy(other); // Destroy the ProjectileHero
             break;

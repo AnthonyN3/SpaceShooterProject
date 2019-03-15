@@ -23,14 +23,40 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
-        bndCheck = GetComponent<BoundsCheck>();
+       bndCheck = GetComponent<BoundsCheck>();
 
+        //This is used to find what type of Enemy is being instantiated and its
+        //corresponding colour the user chose
+        Color currentColor = Color.white;
+        if(gameObject.name == "Enemy_0(Clone)")
+        {
+            currentColor = Data.enemyColor[0];
+        }
+        else if(gameObject.name == "Enemy_1(Clone)")
+        {
+            currentColor = Data.enemyColor[1];
+        }
+        else if(gameObject.name == "Enemy_2(Clone)")
+        {
+            currentColor = Data.enemyColor[2];
+        }
+        else if(gameObject.name == "Enemy_3(Clone)")
+        {
+            currentColor = Data.enemyColor[3];
+        }
+        else if(gameObject.name == "Enemy_4(Clone)")
+        {
+            currentColor = Data.enemyColor[4];
+        }
+
+        
         //Get materials and colors for this GameObject and its children
         materials = Utils.GetAllMaterials( gameObject );
         originalColors = new Color[materials.Length];
         for( int i = 0 ; i < materials.Length ; i++)
         {
-            originalColors[i] = materials[i].color;
+            //originalColors[i] = materials[i].color;       //(OLD CODE)
+            originalColors[i] = currentColor;
         }
     }
 
@@ -109,6 +135,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Creates a visual as if the Enemy is being damaged (turns enemy red)
     void ShowDamage()
     { 
         foreach (Material m in materials) 
@@ -118,13 +145,23 @@ public class Enemy : MonoBehaviour
         showingDamage = true;
         damageDoneTime = Time.time + showDamageDuration;
     }
+
+    //Changes the Enemy back to its original color
     void UnShowDamage() 
     { 
-        for ( int i=0; i<materials.Length; i++ )
+        /* for ( int i=0; i<materials.Length; i++ )
         {
             materials[i].color = originalColors[i];
         }
         showingDamage = false;
+        */
+
+        foreach(var renderer in gameObject.GetComponentsInChildren<Renderer>() )
+        {
+            renderer.material.color = Color.blue;
+        }
+        showingDamage = false;
+
     }
 
 
