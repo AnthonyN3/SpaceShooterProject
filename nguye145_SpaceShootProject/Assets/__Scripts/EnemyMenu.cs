@@ -2,9 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyMenu : MonoBehaviour
 {   
+    public TMP_Dropdown [] pointsDropDown;
+    public TMP_Dropdown [] colorsDropDown;
+
+    void Awake()
+    {
+        int [] temp = new int[5];
+        for(int i = 0 ; i < 5; i++)
+        {
+            if(Data.pointsPerEnemy[i] == 5)
+                temp[i] = 0;
+            else if(Data.pointsPerEnemy[i] == 10)
+                temp[i] = 1;
+            else if(Data.pointsPerEnemy[i] == 15)
+                temp[i] = 2;
+            else if(Data.pointsPerEnemy[i] == 20)
+                temp[i] = 3;
+            else if(Data.pointsPerEnemy[i] == 25)
+                temp[i] = 4;
+        }
+
+        for(int i = 0 ; i < 5 ; i++)
+        {
+            pointsDropDown[i].value = temp[i];
+        }
+
+        
+        int [] temp2 = new int[5];
+        for(int i = 0 ; i < 5; i++)
+        {
+            if(Data.enemyColor[i] == Color.white)
+                temp2[i] = 0;
+            else if(Data.enemyColor[i] == Color.red)
+                temp2[i] = 1;
+            else if(Data.enemyColor[2] == Color.green)
+                temp2[i] = 2;
+            else if(Data.enemyColor[i] == Color.blue)
+                temp2[i] = 3;
+        }
+
+        for(int i = 0 ; i < 5; i++)
+        {
+            colorsDropDown[i].value = temp2[i];
+        }
+    }
+
     public void PtsEnemy0(int value)
     {   
         if(value == 0)

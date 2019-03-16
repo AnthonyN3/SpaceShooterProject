@@ -6,22 +6,55 @@ using TMPro;
 
 public class LevelMenuMangager : MonoBehaviour
 {
+    //Takes the boolean Toggle for selecting which Enemy will spawn for each scene
+    public Toggle [] bronzeEnemiesSelected;
+    public Toggle [] silverEnemiesSelected;
+    public Toggle [] goldEnemiesSelected;
+    
+    public TMP_InputField bronzeMaxInputField; 
+    public TMP_InputField silverMaxInputField;
+    public TMP_InputField goldMaxInputField;
 
+    public TMP_InputField bronzeScoreInputField;
+    public TMP_InputField silverScoreInputField;
+    public TMP_InputField goldScoreInputField;
+
+    void Awake()
+    {
+        //Initialize items based on th Data static script 
+        for(int i = 0; i < 5; i++)
+        {
+            bronzeEnemiesSelected[i].isOn = Data.isEnemyBronze[i];
+            silverEnemiesSelected[i].isOn = Data.isEnemySilver[i];
+            goldEnemiesSelected[i].isOn = Data.isEnemyGold[i];
+        }
+
+        bronzeMaxInputField.text = Data.onScreenBronze.ToString();
+        silverMaxInputField.text = Data.onScreenSilver.ToString();
+        goldMaxInputField.text = Data.onScreenGold.ToString();
+
+        bronzeScoreInputField.text = Data.scoreToWin[0].ToString();
+        silverScoreInputField.text = Data.scoreToWin[1].ToString();
+        goldScoreInputField.text = Data.scoreToWin[2].ToString();
+
+    }
 
     public void BronzeMax(string value)
     {
-        GameObject go = GameObject.Find("InputField MaxEnemies Bronze");
+        //GameObject go = GameObject.Find("InputField MaxEnemies Bronze");
         int x = int.Parse(value);
 
         //value cannot be negative
         if(x <= 0)
         {
-            go.GetComponent<TMP_InputField>().text = "1";
+            //go.GetComponent<TMP_InputField>().text = "1";
+            bronzeMaxInputField.text = "1";
             Data.onScreenBronze = 1;
         }
         else if ( x >= Data.onScreenSilver)
         {
-            go.GetComponent<TMP_InputField>().text = (Data.onScreenSilver-1).ToString();
+            //go.GetComponent<TMP_InputField>().text = (Data.onScreenSilver-1).ToString();
+            bronzeMaxInputField.text = (Data.onScreenSilver-1).ToString();
             Data.onScreenBronze = Data.onScreenSilver-1;    
         }
         else
@@ -33,19 +66,18 @@ public class LevelMenuMangager : MonoBehaviour
 
     public void SilverMax(string value)
     {
-        GameObject go = GameObject.Find("InputField MaxEnemies Silver");
         int x = int.Parse(value);
 
         //value cannot be negative or be less than max screen on bronze level
         //We will automatically make the value +1 more than bronze levels max
         if(x <= Data.onScreenBronze )
         {
-            go.GetComponent<TMP_InputField>().text = (Data.onScreenBronze+1).ToString();
+            silverMaxInputField.text = (Data.onScreenBronze+1).ToString();
             Data.onScreenSilver = Data.onScreenBronze+1;
         } 
         else if (x >= Data.onScreenGold)
         {
-            go.GetComponent<TMP_InputField>().text = (Data.onScreenGold-1).ToString();
+            silverMaxInputField.text = (Data.onScreenGold-1).ToString();
             Data.onScreenSilver = Data.onScreenGold-1;    
         }
         else
@@ -54,22 +86,68 @@ public class LevelMenuMangager : MonoBehaviour
         }
 
     }
-
     public void GoldMax(string value)
     {
-        GameObject go = GameObject.Find("InputField MaxEnemies Gold");
         int x = int.Parse(value);
 
         //value cannot be negative or be less than max screen on Gold level
         //We will automatically make the value +1 more than Gold levels max
         if(x <= Data.onScreenSilver)
         {
-            go.GetComponent<TMP_InputField>().text = (Data.onScreenSilver+1).ToString();
+            goldMaxInputField.text = (Data.onScreenSilver+1).ToString();
             Data.onScreenGold = Data.onScreenSilver+1;
         }
         else
         {
             Data.onScreenGold = x;
+        }
+    }
+
+    public void BronzeScoreToWin(string value)
+    {   
+        //GameObject go = GameObject.Find("InputField ScoreToWin Bronze");
+        int x = int.Parse(value);
+
+        //Score cannot be negative or 0
+        if(x <= 0)
+        {
+            //go.GetComponent<TMP_InputField>().text = 1.ToString();
+            bronzeScoreInputField.text = 1.ToString();
+            Data.scoreToWin[0] = 1;
+        }
+        else
+        {
+            Data.scoreToWin[0] = x;
+        }
+    }
+    public void SilverScoreToWin(string value)
+    {   
+        int x = int.Parse(value);
+
+        //Score cannot be negative or 0
+        if(x <= 0)
+        {
+            silverScoreInputField.text = 1.ToString();
+            Data.scoreToWin[1] = 1;
+        }
+        else
+        {
+            Data.scoreToWin[1] = x;
+        }
+    }
+    public void GoldScoreToWin(string value)
+    {   
+        int x = int.Parse(value);
+
+        //Score cannot be negative or 0
+        if(x <= 0)
+        {
+            goldScoreInputField.text = 1.ToString();
+            Data.scoreToWin[2] = 1;
+        }
+        else
+        {
+            Data.scoreToWin[2] = x;
         }
     }
 
@@ -118,23 +196,23 @@ public class LevelMenuMangager : MonoBehaviour
 
     public void GoldE0 (bool isActive)
     {
-        Data.isEnemySilver[0] = isActive;
+        Data.isEnemyGold[0] = isActive;
     }
     public void GoldE1 (bool isActive)
     {
-        Data.isEnemySilver[1] = isActive;
+        Data.isEnemyGold[1] = isActive;
     }
     public void GoldE2 (bool isActive)
     {
-        Data.isEnemySilver[2] = isActive;
+        Data.isEnemyGold[2] = isActive;
     }
     public void GoldE3 (bool isActive)
     {
-        Data.isEnemySilver[3] = isActive;
+        Data.isEnemyGold[3] = isActive;
     }
     public void GoldE4 (bool isActive)
     {
-        Data.isEnemySilver[4] = isActive;
+        Data.isEnemyGold[4] = isActive;
     }
 
 
