@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         {
             fireDelegate(); 
         }
-
     }
 
     void TempFire()
@@ -91,6 +90,8 @@ public class Player : MonoBehaviour
 
         if (go.tag == "Enemy")
         {
+            Data.EnemiesOnScreenNow--; 
+
             shieldLevel1--; //decreases the level of the shield by 1
             Destroy(go);    // destroys the enemy gameObject after it makes contact with hero
         } 

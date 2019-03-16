@@ -12,6 +12,7 @@ public static class Data
     public static int onScreenBronze = 3;
     public static int onScreenSilver = 5;
     public static int onScreenGold = 10;
+    public static int EnemiesOnScreenNow = 0;
 
     //Stores the types of enemies for each level (Levels: Bronze, Silver, and gold)
     //index[0] == Enemy_0 , index[1] == Enemy_1... etc

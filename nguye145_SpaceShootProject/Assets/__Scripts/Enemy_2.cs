@@ -49,6 +49,7 @@ public class Enemy_2 : Enemy
         //if u > 1, then it has been longer than lifeTime since brithTime
         if(u > 1)
         {
+            Data.EnemiesOnScreenNow--;
             // This enemy_2 has finished its life
             Destroy( this.gameObject);
             return;

@@ -50,6 +50,7 @@ public class Enemy_3 : Enemy
 
         if(u > 1)
         {
+            Data.EnemiesOnScreenNow--;
             //This enemy 3 has finished its life
             Destroy(this.gameObject);
             return;

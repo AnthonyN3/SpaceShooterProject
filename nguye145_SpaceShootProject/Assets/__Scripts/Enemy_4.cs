@@ -188,8 +188,11 @@ public class Enemy_4 : Enemy
                     Main.S.ShipDestroyed( this );
                     // Destroy this Enemy
 
-                    Data.enemyKilled[4] += 1;
+
+                    //change information in static script
+                    Data.enemyKilled[4]++;
                     Data.Score += Data.pointsPerEnemy[4];
+                    Data.EnemiesOnScreenNow--;
 
                     Destroy(this.gameObject);
                 }

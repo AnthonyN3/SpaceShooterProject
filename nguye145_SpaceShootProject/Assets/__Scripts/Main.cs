@@ -20,7 +20,6 @@ public class Main : MonoBehaviour
 
     private BoundsCheck bndCheck;
 
-
     public void ShipDestroyed( Enemy e ) 
     {
         // Potentially generate a PowerUp
@@ -55,6 +54,14 @@ public class Main : MonoBehaviour
         {
             WEAP_DICT[def.type] = def;
         }
+
+        //Also used to reset Data when player dies
+        for(int i = 0 ; i < 5; i++)
+        {
+            Data.enemyKilled[i] = 0;
+        }
+        Data.Score = 0;
+        Data.EnemiesOnScreenNow = 0;
     }
 
     public void SpawnEnemy()
@@ -209,7 +216,8 @@ public class Main : MonoBehaviour
         }
 
         GameObject go = Instantiate<GameObject>( prefabEnemiesNew[ ndx ] );
-        
+        Data.EnemiesOnScreenNow++;
+
         int colorIndex = 0;
         if(go.name == "Enemy_0(Clone)")
             colorIndex = 0;
@@ -224,8 +232,7 @@ public class Main : MonoBehaviour
 
         foreach(var renderer in go.GetComponentsInChildren<Renderer>() )
         {   
-            renderer.material.color = Data.enemyColor[colorIndex];
-          
+            renderer.material.color = Data.enemyColor[colorIndex];    
         }
 
         //Position the Enemy above the screen with a random x position
@@ -243,9 +250,41 @@ public class Main : MonoBehaviour
         pos.y = bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;
 
-        //Invoke SpawnEnemy() again
-        Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+
+        //Checks the maximum allowed enemies on screen depending on which level player is on
+        if(SceneManager.GetActiveScene().name == "BronzeLevel" )
+        {
+            if(Data.EnemiesOnScreenNow < Data.onScreenBronze)
+                Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+            else
+                StartCoroutine(AddEnemyWhenFree(Data.onScreenBronze));
+        }
+        else if(SceneManager.GetActiveScene().name == "SilverLevel")
+        {
+            if(Data.EnemiesOnScreenNow < Data.onScreenSilver)
+                Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+            else
+                StartCoroutine(AddEnemyWhenFree(Data.onScreenSilver));
+        }
+        else if(SceneManager.GetActiveScene().name == "Goldlevel")
+        {
+            if(Data.EnemiesOnScreenNow < Data.onScreenGold)
+                Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+            else
+                StartCoroutine(AddEnemyWhenFree(Data.onScreenGold));
+        }
     }
+
+    //Adds a enemy only when max number of enemies are not on the screen
+    IEnumerator AddEnemyWhenFree(int MaxEnemyOnScreen)
+    {
+        //while(isMaxEnemy) yield return null;
+        while(Data.EnemiesOnScreenNow >= MaxEnemyOnScreen) yield return null;
+        {
+            Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+        }
+    }
+
 
     public void DelaayedRestart( float delay)
     {
@@ -255,12 +294,6 @@ public class Main : MonoBehaviour
 
     public void Restart()
     {
-        for(int i = 0 ; i < 5; i++)
-        {
-            Data.enemyKilled[i] = 0;
-        }
-        Data.Score = 0;
-        
         if(SceneManager.GetActiveScene().name == "BronzeLevel")
             SceneManager.LoadScene("BronzeLevel");
         else if(SceneManager.GetActiveScene().name == "SilverLevel")

@@ -91,6 +91,8 @@ public class Enemy : MonoBehaviour
         //If it isnt on screen then it will pass through this if statement
         if( bndCheck != null && bndCheck.offDown )
         {   
+            Data.EnemiesOnScreenNow--;
+
             //if so, gets deleted
             Destroy (gameObject);
         }
@@ -152,11 +154,13 @@ public class Enemy : MonoBehaviour
                     }
                     //NOTE: Enemy 4 is not included because Enemy_4 has its own OnCollisionScript 
                     //that overides this
-                    
+
+                    Data.EnemiesOnScreenNow--;
                     
                     // Destroy this Enemy
                     Destroy(this.gameObject);
                 }
+               
                 Destroy( otherGO );
             break;
 
