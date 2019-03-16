@@ -62,6 +62,7 @@ public class Main : MonoBehaviour
         //Pick a random Enemy prefab to instantiate (also based of which Level)
         int ndx = 0;
         GameObject []prefabEnemiesNew = new GameObject[10];
+        
         if(SceneManager.GetActiveScene().name == "BronzeLevel" )
         {   
             int x = 0;
@@ -110,20 +111,104 @@ public class Main : MonoBehaviour
             
             ndx = Random.Range(0, EnemiesNum);
         }
+        else if(SceneManager.GetActiveScene().name == "SilverLevel" )
+        {   
+            int x = 0;
+            for(int i = 0 ; i < Data.isEnemySilver.Length ; i++)
+            {
+                if(Data.isEnemySilver[i])
+                {   
+                    if(i == 0)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[0];
+                        prefabEnemiesNew[x+1] = prefabEnemies[1];
+                        prefabEnemiesNew[x+2] = prefabEnemies[2];
+                        x += 3;
+                    }
+                    else if (i == 1)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[3];
+                        prefabEnemiesNew[x+1] = prefabEnemies[4];
+                        x += 2;
+                    }
+                    else if (i == 2)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[5];
+                        prefabEnemiesNew[x+1] = prefabEnemies[6];
+                        x += 2;
+                    }
+                    else if(i == 3)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[7];
+                        prefabEnemiesNew[x+1] = prefabEnemies[8];
+                        x += 2;
+                    }
+                    else if(i == 4)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[9];
+                        x++;
+                    }      
+                }
+            }
+            
+            int EnemiesNum = 0;
+            for(int i = 0 ; prefabEnemiesNew[i] != null; i++)
+            {
+                EnemiesNum++;
+            }
+            
+            ndx = Random.Range(0, EnemiesNum);
+        }
+        else if(SceneManager.GetActiveScene().name == "GoldLevel" )
+        {   
+            int x = 0;
+            for(int i = 0 ; i < Data.isEnemyGold.Length ; i++)
+            {
+                if(Data.isEnemyGold[i])
+                {   
+                    if(i == 0)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[0];
+                        prefabEnemiesNew[x+1] = prefabEnemies[1];
+                        prefabEnemiesNew[x+2] = prefabEnemies[2];
+                        x += 3;
+                    }
+                    else if (i == 1)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[3];
+                        prefabEnemiesNew[x+1] = prefabEnemies[4];
+                        x += 2;
+                    }
+                    else if (i == 2)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[5];
+                        prefabEnemiesNew[x+1] = prefabEnemies[6];
+                        x += 2;
+                    }
+                    else if(i == 3)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[7];
+                        prefabEnemiesNew[x+1] = prefabEnemies[8];
+                        x += 2;
+                    }
+                    else if(i == 4)
+                    {
+                        prefabEnemiesNew[x] = prefabEnemies[9];
+                        x++;
+                    }      
+                }
+            }
+            
+            int EnemiesNum = 0;
+            for(int i = 0 ; prefabEnemiesNew[i] != null; i++)
+            {
+                EnemiesNum++;
+            }
+            
+            ndx = Random.Range(0, EnemiesNum);
+        }
 
         GameObject go = Instantiate<GameObject>( prefabEnemiesNew[ ndx ] );
-
-        /* int enemyIndex ;
-        if(ndx >= 0 && ndx <= 2)
-            enemyIndex = 0;
-        else if(ndx == 3 || ndx == 4)
-            enemyIndex = 1;
-        else if(ndx == 5 || ndx == 6)
-            enemyIndex = 2;
-        else if(ndx == 7 || ndx == 8)
-            enemyIndex = 3;
-        else
-            enemyIndex = 4;*/
         
         int colorIndex = 0;
         if(go.name == "Enemy_0(Clone)")
@@ -170,8 +255,18 @@ public class Main : MonoBehaviour
 
     public void Restart()
     {
-        //Reload Scene to restart private void OnParticleCollision(GameObject other)
-        SceneManager.LoadScene("BronzeLevel");
+        for(int i = 0 ; i < 5; i++)
+        {
+            Data.enemyKilled[i] = 0;
+        }
+        Data.Score = 0;
+        
+        if(SceneManager.GetActiveScene().name == "BronzeLevel")
+            SceneManager.LoadScene("BronzeLevel");
+        else if(SceneManager.GetActiveScene().name == "SilverLevel")
+            SceneManager.LoadScene("SilverLevel");
+        else if(SceneManager.GetActiveScene().name == "GoldLevel")
+            SceneManager.LoadScene("GodlLevel");
     }
 
     /// <summary>

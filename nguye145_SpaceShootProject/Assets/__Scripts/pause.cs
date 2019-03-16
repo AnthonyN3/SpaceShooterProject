@@ -21,14 +21,15 @@ public class pause : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Escape))
 				paused = !paused;			
 
-		// or just do (pause)
-		if (paused == true){
+		if (paused)
+		{
 			Time.timeScale = 0;
 			pauseCanvas.SetActive (true);
 
 		}
-		// or just do (!pause)
-		else if (paused == false){
+		else if (!paused && !GameUIManager.isWin)
+		{
+
 			Time.timeScale  = 1;
 			pauseCanvas.SetActive(false); 
 		}

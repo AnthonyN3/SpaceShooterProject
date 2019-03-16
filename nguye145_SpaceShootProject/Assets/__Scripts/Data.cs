@@ -28,5 +28,4 @@ public static class Data
     //public static string [] enemyColor = {"white","white","white","white","white"};
     public static Color [] enemyColor = {Color.white, Color.white, Color.white, Color.white, Color.white};
 
-
 }
