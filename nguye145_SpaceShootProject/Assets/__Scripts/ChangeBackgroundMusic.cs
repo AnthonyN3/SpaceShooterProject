@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeBackgroundMusic : MonoBehaviour
 {
-    public GameObject objMusic;    //references the BackgroundMusic object
+    public GameObject objMusic;   //BackgroundMusicObject
 
     void Awake()
     {

@@ -28,5 +28,8 @@ public static class Data
     //public static string [] enemyColor = {"white","white","white","white","white"};
     public static Color [] enemyColor = {Color.white, Color.white, Color.white, Color.white, Color.white};
 
-    public static AudioClip [] clips;
+    public static AudioClip [] playerBlaster;
+
+    public static AudioClip [] enemyDestroy;
+    public static AudioClip [] clearStage;
 }
