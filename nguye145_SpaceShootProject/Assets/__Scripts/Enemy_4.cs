@@ -187,6 +187,10 @@ public class Enemy_4 : Enemy
                     // ...tell the Main singleton that this ship was destroyed
                     Main.S.ShipDestroyed( this );
                     // Destroy this Enemy
+
+                    Data.enemyKilled[4] += 1;
+                    Data.Score += Data.pointsPerEnemy[4];
+
                     Destroy(this.gameObject);
                 }
                 Destroy(other); // Destroy the ProjectileHero

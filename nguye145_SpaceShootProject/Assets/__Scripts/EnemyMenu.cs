@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyMenu : MonoBehaviour
-{
-    
+{   
     public void PtsEnemy0(int value)
     {   
         if(value == 0)

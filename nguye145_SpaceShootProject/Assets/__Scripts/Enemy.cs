@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     protected BoundsCheck bndCheck;
 
     private Color currentColor;
+    private bool isRed = false;
 
     void Awake()
     {
@@ -51,6 +52,9 @@ public class Enemy : MonoBehaviour
             currentColor = Data.enemyColor[4];
         }
 
+        //Used to change the ShowDamage to white
+        if(currentColor == Color.red)
+            isRed = true;
         
         //Get materials and colors for this GameObject and its children
         materials = Utils.GetAllMaterials( gameObject );
@@ -124,7 +128,32 @@ public class Enemy : MonoBehaviour
                         Main.S.ShipDestroyed( this );
                     }
                     notifiedOfDestruction = true;
-
+                    
+                    //Adds score
+                    if(gameObject.name == "Enemy_0(Clone)")
+                    {
+                        Data.Score += Data.pointsPerEnemy[0];
+                        Data.enemyKilled[0] += 1;
+                    }
+                    else if(gameObject.name == "Enemy_1(Clone)")
+                    {
+                        Data.Score += Data.pointsPerEnemy[1];
+                        Data.enemyKilled[1] += 1;
+                    }
+                    else if(gameObject.name == "Enemy_2(Clone)")
+                    {
+                        Data.Score += Data.pointsPerEnemy[2];
+                        Data.enemyKilled[2] += 1;
+                    }
+                    else if(gameObject.name == "Enemy_3(Clone)")
+                    {
+                        Data.Score += Data.pointsPerEnemy[3];
+                        Data.enemyKilled[3] += 1;
+                    }
+                    //NOTE: Enemy 4 is not included because Enemy_4 has its own OnCollisionScript 
+                    //that overides this
+                    
+                    
                     // Destroy this Enemy
                     Destroy(this.gameObject);
                 }
@@ -140,9 +169,13 @@ public class Enemy : MonoBehaviour
     //Creates a visual as if the Enemy is being damaged (turns enemy red)
     void ShowDamage()
     { 
+
         foreach (Material m in materials) 
-        {
-            m.color = Color.red;
+        {   
+            if(isRed)
+                m.color = Color.white;
+            else
+                m.color = Color.red;
         }
         showingDamage = true;
         damageDoneTime = Time.time + showDamageDuration;

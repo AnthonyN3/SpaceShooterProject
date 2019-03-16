@@ -40,12 +40,9 @@ public class Main : MonoBehaviour
         }
     }  
 
-
-
     void Awake()
     {
         S = this;
-
         //Set bndCheck to reference the BoundsCheck component on this gameObject(on the camera)
         bndCheck = GetComponent<BoundsCheck>();
 
@@ -116,7 +113,7 @@ public class Main : MonoBehaviour
 
         GameObject go = Instantiate<GameObject>( prefabEnemiesNew[ ndx ] );
 
-        int enemyIndex ;
+        /* int enemyIndex ;
         if(ndx >= 0 && ndx <= 2)
             enemyIndex = 0;
         else if(ndx == 3 || ndx == 4)
@@ -126,11 +123,24 @@ public class Main : MonoBehaviour
         else if(ndx == 7 || ndx == 8)
             enemyIndex = 3;
         else
-            enemyIndex = 4;
+            enemyIndex = 4;*/
+        
+        int colorIndex = 0;
+        if(go.name == "Enemy_0(Clone)")
+            colorIndex = 0;
+        else if(go.name == "Enemy_1(Clone)")
+            colorIndex = 1;
+        else if(go.name == "Enemy_2(Clone)")
+            colorIndex = 2;
+        else if(go.name == "Enemy_3(Clone)")
+            colorIndex = 3;
+        else if(go.name == "Enemy_4(Clone)")
+            colorIndex = 4;
 
         foreach(var renderer in go.GetComponentsInChildren<Renderer>() )
         {   
-            renderer.material.color = Data.enemyColor[enemyIndex];
+            renderer.material.color = Data.enemyColor[colorIndex];
+          
         }
 
         //Position the Enemy above the screen with a random x position
@@ -161,7 +171,7 @@ public class Main : MonoBehaviour
     public void Restart()
     {
         //Reload Scene to restart private void OnParticleCollision(GameObject other)
-        SceneManager.LoadScene("_Scene_0");
+        SceneManager.LoadScene("BronzeLevel");
     }
 
     /// <summary>
@@ -187,7 +197,7 @@ public class Main : MonoBehaviour
     // which means it has failed to find the right WeaponDefinition
     return( new WeaponDefinition() ); // c
 
-}
+    }
 
 
 }

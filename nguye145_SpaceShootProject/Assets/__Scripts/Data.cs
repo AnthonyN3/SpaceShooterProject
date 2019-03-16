@@ -5,6 +5,9 @@ using UnityEngine;
 //This class will be used to store variables/info to be passed between scenes
 public static class Data
 {
+    public static int Score = 0;
+    public static int [] enemyKilled = {0,0,0,0,0};
+
     //Stores the values for enemies on screen
     public static int onScreenBronze = 3;
     public static int onScreenSilver = 5;
@@ -18,11 +21,12 @@ public static class Data
 
     //Stores score limit need to complete each level
     //[0] - Bronze level, [1] - Silver level, [2] - Gold level
-    public static int [] scoreLimit = {50, 100, 150};
+    public static int [] scoreToWin = {50, 100, 150};
  
     //Stores the score gained for the destruction of each enemy (enemy 0,1,2,3 and 4)
     public static int [] pointsPerEnemy = {5,10,15,20,25};
     //public static string [] enemyColor = {"white","white","white","white","white"};
     public static Color [] enemyColor = {Color.white, Color.white, Color.white, Color.white, Color.white};
+
 
 }
