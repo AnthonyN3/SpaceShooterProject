@@ -27,9 +27,8 @@ public class pause : MonoBehaviour
 			pauseCanvas.SetActive (true);
 
 		}
-		else if (!paused && !GameUIManager.isWin)
+		else if (!paused)
 		{
-
 			Time.timeScale  = 1;
 			pauseCanvas.SetActive(false); 
 		}

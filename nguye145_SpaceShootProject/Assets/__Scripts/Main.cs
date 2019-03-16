@@ -251,6 +251,11 @@ public class Main : MonoBehaviour
         go.transform.position = pos;
 
 
+        if(GameUIManager.isWin)
+        {
+            return;
+        }
+
         //Checks the maximum allowed enemies on screen depending on which level player is on
         if(SceneManager.GetActiveScene().name == "BronzeLevel" )
         {
@@ -273,6 +278,7 @@ public class Main : MonoBehaviour
             else
                 StartCoroutine(AddEnemyWhenFree(Data.onScreenGold));
         }
+    
     }
 
     //Adds a enemy only when max number of enemies are not on the screen

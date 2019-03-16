@@ -23,6 +23,11 @@ public class GameUIManager : MonoBehaviour
     //Since we call Time.timeScale = 1 in the pause script
     public static bool isWin = false; 
 
+    void Awake()
+    {
+        isWin = false;
+    }
+
     void Start()
     {
         if(SceneManager.GetActiveScene().name == "BronzeLevel")
@@ -44,9 +49,8 @@ public class GameUIManager : MonoBehaviour
         E4Text.text = "E4: " + Data.enemyKilled[4];
 
         if(Data.Score >= Data.scoreToWin[LevelIndex] && !isWin )
-        {
+        {   
             isWin = true;
-            
             Invoke("Win", 2);
         }
 
