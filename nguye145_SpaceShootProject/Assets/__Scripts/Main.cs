@@ -334,7 +334,7 @@ public class Main : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "SilverLevel")
             SceneManager.LoadScene("SilverLevel");
         else if(SceneManager.GetActiveScene().name == "GoldLevel")
-            SceneManager.LoadScene("GodlLevel");
+            SceneManager.LoadScene("GoldLevel");
     }
 
     /// <summary>
