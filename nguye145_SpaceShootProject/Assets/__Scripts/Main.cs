@@ -127,6 +127,12 @@ public class Main : MonoBehaviour
                 }
             }
             
+            if(x == 0)
+            {
+                Debug.LogError("NO ENEMIES WERE SLECTED FOR THIS LEVEL");
+                return;
+            }
+
             int EnemiesNum = 0;
             for(int i = 0 ; i < 10 && prefabEnemiesNew[i] != null; i++)
             {
@@ -173,6 +179,12 @@ public class Main : MonoBehaviour
                         x++;
                     }      
                 }
+            }
+
+            if(x == 0)
+            {
+                Debug.LogError("NO ENEMIES WERE SLECTED FOR THIS LEVEL");
+                return;
             }
             
             int EnemiesNum = 0;
@@ -223,6 +235,12 @@ public class Main : MonoBehaviour
                 }
             }
             
+            if(x == 0)
+            {
+                Debug.LogError("NO ENEMIES WERE SLECTED FOR THIS LEVEL");
+                return;
+            }
+
             int EnemiesNum = 0;
             for(int i = 0 ; i < 10 && prefabEnemiesNew[i] != null ; i++)
             {

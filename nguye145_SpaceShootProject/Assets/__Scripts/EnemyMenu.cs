@@ -11,36 +11,34 @@ public class EnemyMenu : MonoBehaviour
 
     void Awake()
     {
-        int [] temp = new int[5];
-        int [] temp2 = new int[5];
+        int temp;
+        int temp2;
         
         //For points
         for(int i = 0 ; i < 5; i++)
         {
             if(Data.pointsPerEnemy[i] == 5)
-                temp[i] = 0;
+                temp = 0;
             else if(Data.pointsPerEnemy[i] == 10)
-                temp[i] = 1;
+                temp = 1;
             else if(Data.pointsPerEnemy[i] == 15)
-                temp[i] = 2;
+                temp = 2;
             else if(Data.pointsPerEnemy[i] == 20)
-                temp[i] = 3;
-            else if(Data.pointsPerEnemy[i] == 25)
-                temp[i] = 4;
+                temp = 3;
+            else
+                temp = 4;
 
             if(Data.enemyColor[i] == Color.white)
-                temp2[i] = 0;
+                temp2 = 0;
             else if(Data.enemyColor[i] == Color.red)
-                temp2[i] = 1;
-            else if(Data.enemyColor[2] == Color.green)
-                temp2[i] = 2;
-            else if(Data.enemyColor[i] == Color.blue)
-                temp2[i] = 3;
-        }
-        for(int i = 0 ; i < 5; i++)
-        {
-            pointsDropDown[i].value = temp[i];
-            colorsDropDown[i].value = temp2[i];
+                temp2 = 1;
+            else if(Data.enemyColor[i] == Color.green)
+                temp2 = 2;
+            else
+                temp2 = 3;
+
+            pointsDropDown[i].value = temp;
+            colorsDropDown[i].value = temp2;
         }
     }
 
