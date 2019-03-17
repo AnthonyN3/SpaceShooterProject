@@ -10,3 +10,6 @@ Tutorial from textbook (Introduction to GAME DESIGN PROTOTYPING, and DEVELOPMENT
 ![Capture6](https://user-images.githubusercontent.com/46362634/54487869-743a6880-4871-11e9-9403-c6e4eef25250.PNG)
 ![Capture7](https://user-images.githubusercontent.com/46362634/54487877-87e5cf00-4871-11e9-907d-a444dca712bd.PNG)
 ![Capture5](https://user-images.githubusercontent.com/46362634/54487878-8caa8300-4871-11e9-922f-716b89e3f069.PNG)
+![Capture8](https://user-images.githubusercontent.com/46362634/54487941-3d188700-4872-11e9-80c1-70470818aaa8.PNG)
+![Capture9](https://user-images.githubusercontent.com/46362634/54487943-40137780-4872-11e9-989c-f96c2de53dc0.PNG)
+
