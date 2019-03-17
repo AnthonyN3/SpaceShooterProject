@@ -20,6 +20,11 @@ public class Main : MonoBehaviour
 
     private BoundsCheck bndCheck;
 
+
+    [Header("Game Audio")]
+    public AudioClip playerDeath;
+    public AudioClip gameOver;
+
     public void ShipDestroyed( Enemy e ) 
     {
         // Potentially generate a PowerUp

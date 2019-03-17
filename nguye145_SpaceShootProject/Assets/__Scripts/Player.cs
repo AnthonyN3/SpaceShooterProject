@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public delegate void WeaponFireDelegate();
     public WeaponFireDelegate fireDelegate;
 
+
     void Start()
     {   
         //If there are 2 heros with this script, and it tries to assign S to another instance
@@ -57,11 +58,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null) 
         {
-            fireDelegate(); 
+            fireDelegate();
         }
     }
 
-    void TempFire()
+    //This way of shooting projectiles is not used anymore
+    /* void TempFire()
     {
         GameObject projGO = Instantiate<GameObject>(projectilePrefab);
         projGO.transform.position = transform.position;
@@ -72,7 +74,7 @@ public class Player : MonoBehaviour
         float tSpeed = Main.GetWeaponDefinition( proj.type ).velocity;
         rigidB.velocity = Vector3.up * tSpeed;
 
-    }
+    }*/
 
 
     void OnTriggerEnter(Collider other)
@@ -151,7 +153,7 @@ public class Player : MonoBehaviour
             if (value < 0)
             {
                 Destroy(this.gameObject);
-
+                
                 //this tells Main.s to restart the game after a delay
                 Main.S.DelaayedRestart(gameRestartDelay);
             }

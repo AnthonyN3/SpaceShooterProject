@@ -24,9 +24,13 @@ public class Enemy : MonoBehaviour
     private Color currentColor;
     private bool isRed = false;
 
+
+    private GameObject deathAudio;    //used to play the enemy death audio
     void Awake()
     {
-       bndCheck = GetComponent<BoundsCheck>();
+        bndCheck = GetComponent<BoundsCheck>();
+
+        deathAudio = GameObject.FindGameObjectWithTag("EnemyDestroyedAudio");
 
         //This is used to find what type of Enemy is being instantiated and its
         //corresponding colour the user chose
@@ -156,6 +160,9 @@ public class Enemy : MonoBehaviour
                     //that overides this
 
                     Data.EnemiesOnScreenNow--;
+
+                    //play the enemy death audio
+                    deathAudio.GetComponent<EnemyKilledAudio>().PlayEnemyDeathAudio();
                     
                     // Destroy this Enemy
                     Destroy(this.gameObject);

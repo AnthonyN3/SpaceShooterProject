@@ -11,6 +11,9 @@ TagManager:
   - PowerUp
   - PowerUpBox
   - music
+  - BlasterAudio
+  - EnemyDestroyedAudio
+  - WinAudio
   layers:
   - Default
   - TransparentFX

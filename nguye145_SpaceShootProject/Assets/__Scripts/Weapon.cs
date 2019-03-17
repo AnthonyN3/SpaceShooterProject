@@ -48,6 +48,15 @@ public class Weapon : MonoBehaviour
     public GameObject collar;
     public float lastShotTime; // Time last shot was fired
     private Renderer collarRend;
+
+
+    private GameObject BlasterAudio;    //used to play a projectile Audio while shooting projectile
+    void Awake()
+    {
+        BlasterAudio = GameObject.FindGameObjectWithTag("BlasterAudio");
+    }
+
+
     void Start() 
     {
         collar = transform.Find("Collar").gameObject;
@@ -118,6 +127,8 @@ public class Weapon : MonoBehaviour
     }
     public Projectile MakeProjectile()
     { 
+        BlasterAudio.GetComponent<BlasterAudio>().PlayBlasterAudio();   //Play blaster audio
+
         GameObject go = Instantiate<GameObject>( def.projectilePrefab );
         if ( transform.parent.gameObject.tag == "_Player" ) {
         go.tag = "ProjectilePlayer";
