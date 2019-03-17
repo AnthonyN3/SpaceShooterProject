@@ -20,7 +20,6 @@ public class Main : MonoBehaviour
 
     private BoundsCheck bndCheck;
 
-
     [Header("Game Audio")]
     public AudioClip playerDeath;
     public AudioClip gameOver;
@@ -67,6 +66,19 @@ public class Main : MonoBehaviour
         }
         Data.Score = 0;
         Data.EnemiesOnScreenNow = 0;
+
+    }
+    void Update()
+    {
+        if(GameUIManager.isWin)
+        {
+            GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            for(int i = 0 ; i < allEnemies.Length ; ++i)
+            {
+                Destroy(allEnemies[i]);
+            }
+        }
     }
 
     public void SpawnEnemy()
@@ -255,7 +267,7 @@ public class Main : MonoBehaviour
         pos.y = bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;
 
-
+        //Cancel any further spawning if level is won
         if(GameUIManager.isWin)
         {
             return;
@@ -297,10 +309,22 @@ public class Main : MonoBehaviour
     }
 
 
+    //I defaulted Restart Delay to be 5 seconds (because the Game Over Audio is 5 seconds long)
     public void DelaayedRestart( float delay)
     {
+        //Play the destruction audio for death
+        gameObject.GetComponent<AudioSource>().clip = playerDeath;
+        gameObject.GetComponent<AudioSource>().Play();
+        Invoke("GameOverSound", 1);
+
         //Invoke the Restart() method in delay secods
         Invoke( "Restart", delay);
+    }
+
+    private void GameOverSound()
+    {
+        gameObject.GetComponent<AudioSource>().clip = gameOver;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void Restart()

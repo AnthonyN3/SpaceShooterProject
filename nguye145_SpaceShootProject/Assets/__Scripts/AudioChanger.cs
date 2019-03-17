@@ -40,6 +40,7 @@ public class AudioChanger : MonoBehaviour
         musicObject = GameObject.FindGameObjectWithTag("music");
         blasterAudio = GameObject.FindGameObjectWithTag("BlasterAudio");
         enemyDestroyedAudio = GameObject.FindGameObjectWithTag("EnemyDestroyedAudio");
+        clearStageAudio = GameObject.FindGameObjectWithTag("WinAudio");
 
         gameRanOnce = false;
 

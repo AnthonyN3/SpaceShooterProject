@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+using System.Diagnostics;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -16,6 +16,9 @@ public class GameUIManager : MonoBehaviour
     public TextMeshProUGUI E4Text;
 
 
+    public TextMeshProUGUI timeText;
+    private Stopwatch timer;
+
     //Used to check which level we are on, 0, 1 or 2
     private int LevelIndex;
 
@@ -23,8 +26,11 @@ public class GameUIManager : MonoBehaviour
     //Since we call Time.timeScale = 1 in the pause script
     public static bool isWin = false; 
 
+
+    private GameObject winGameAudio;
     void Awake()
     {
+        winGameAudio = GameObject.FindGameObjectWithTag("WinAudio");
         isWin = false;
     }
 
@@ -36,21 +42,29 @@ public class GameUIManager : MonoBehaviour
             LevelIndex = 1;
         else if(SceneManager.GetActiveScene().name == "GoldLevel")
             LevelIndex = 2;
+
+
+        timer = new Stopwatch();
+        timer.Start();
     }  
 
     void Update()
     {   
         //NOTE: since we started with a string, we dont need to add ToString() at the end of the ints
-        scoreText.text = "Score:" + Data.Score;
+        scoreText.text = "Score:" + Data.Score + "/" + Data.scoreToWin[LevelIndex];
         E0Text.text = "E0: " + Data.enemyKilled[0];
         E1Text.text = "E1: " + Data.enemyKilled[1];
         E2Text.text = "E2: " + Data.enemyKilled[2];
         E3Text.text = "E3: " + Data.enemyKilled[3];
         E4Text.text = "E4: " + Data.enemyKilled[4];
+        timeText.text = timer.Elapsed.Seconds + " s";
 
+        //Checks if you reached max score (you win)
         if(Data.Score >= Data.scoreToWin[LevelIndex] && !isWin )
         {   
             isWin = true;
+            timer.Stop();
+            winGameAudio.GetComponent<ClearStageAudio>().PlayWinAudio();
             Invoke("Win", 2);
         }
 
@@ -58,7 +72,7 @@ public class GameUIManager : MonoBehaviour
 
     public void Win()
     {
-        Debug.Log("GAME END");
+        UnityEngine.Debug.Log("GAME OVER");
     }
 
 

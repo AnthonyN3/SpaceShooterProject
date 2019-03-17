@@ -130,13 +130,17 @@ public class Weapon : MonoBehaviour
         BlasterAudio.GetComponent<BlasterAudio>().PlayBlasterAudio();   //Play blaster audio
 
         GameObject go = Instantiate<GameObject>( def.projectilePrefab );
-        if ( transform.parent.gameObject.tag == "_Player" ) {
-        go.tag = "ProjectilePlayer";
-        go.layer = LayerMask.NameToLayer("ProjectilePlayer");
-        } else {
-        go.tag = "ProjectileEnemy";
-        go.layer = LayerMask.NameToLayer("ProjectileEnemy");
+        if ( transform.parent.gameObject.tag == "_Player" ) 
+        {
+            go.tag = "ProjectilePlayer";
+            go.layer = LayerMask.NameToLayer("ProjectilePlayer");
+        } 
+        else 
+        {
+            go.tag = "ProjectileEnemy";
+            go.layer = LayerMask.NameToLayer("ProjectileEnemy");
         }
+        
         go.transform.position = collar.transform.position;
         go.transform.SetParent( PROJECTILE_ANCHOR, true ); 
         Projectile p = go.GetComponent<Projectile>();

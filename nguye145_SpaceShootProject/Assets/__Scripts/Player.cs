@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float speed = 30;
     public float rollMult = -45;
     public float pitchMult = 30;
-    public float gameRestartDelay = 2f;
+    public float gameRestartDelay = 4f;
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
             if (value < 0)
             {
                 Destroy(this.gameObject);
-                
+
                 //this tells Main.s to restart the game after a delay
                 Main.S.DelaayedRestart(gameRestartDelay);
             }
