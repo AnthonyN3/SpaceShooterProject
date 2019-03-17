@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Diagnostics;
+using UnityEditor.SceneManagement;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -72,7 +73,11 @@ public class GameUIManager : MonoBehaviour
 
     public void Win()
     {
-        UnityEngine.Debug.Log("GAME OVER");
+        isWin = false;
+        if(SceneManager.GetActiveScene().name == "GoldLevel")
+            SceneManager.LoadScene(0);      //same as loading menu
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1 );
     }
 
 

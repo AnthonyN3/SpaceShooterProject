@@ -128,7 +128,7 @@ public class Main : MonoBehaviour
             }
             
             int EnemiesNum = 0;
-            for(int i = 0 ; prefabEnemiesNew[i] != null; i++)
+            for(int i = 0 ; i < 10 && prefabEnemiesNew[i] != null; i++)
             {
                 EnemiesNum++;
             }
@@ -176,7 +176,7 @@ public class Main : MonoBehaviour
             }
             
             int EnemiesNum = 0;
-            for(int i = 0 ; prefabEnemiesNew[i] != null; i++)
+            for(int i = 0 ; i < 10 && prefabEnemiesNew[i] != null ; i++)
             {
                 EnemiesNum++;
             }
@@ -224,7 +224,7 @@ public class Main : MonoBehaviour
             }
             
             int EnemiesNum = 0;
-            for(int i = 0 ; prefabEnemiesNew[i] != null; i++)
+            for(int i = 0 ; i < 10 && prefabEnemiesNew[i] != null ; i++)
             {
                 EnemiesNum++;
             }
@@ -288,7 +288,7 @@ public class Main : MonoBehaviour
             else
                 StartCoroutine(AddEnemyWhenFree(Data.onScreenSilver));
         }
-        else if(SceneManager.GetActiveScene().name == "Goldlevel")
+        else if(SceneManager.GetActiveScene().name == "GoldLevel")
         {
             if(Data.EnemiesOnScreenNow < Data.onScreenGold)
                 Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);

@@ -27,11 +27,7 @@ public class EnemyMenu : MonoBehaviour
                 temp[i] = 3;
             else if(Data.pointsPerEnemy[i] == 25)
                 temp[i] = 4;
-        }
 
-        //For colors
-        for(int i = 0 ; i < 5; i++)
-        {
             if(Data.enemyColor[i] == Color.white)
                 temp2[i] = 0;
             else if(Data.enemyColor[i] == Color.red)
@@ -41,7 +37,6 @@ public class EnemyMenu : MonoBehaviour
             else if(Data.enemyColor[i] == Color.blue)
                 temp2[i] = 3;
         }
-
         for(int i = 0 ; i < 5; i++)
         {
             pointsDropDown[i].value = temp[i];
