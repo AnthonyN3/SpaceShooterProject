@@ -108,12 +108,17 @@ public class LevelMenuMangager : MonoBehaviour
         //GameObject go = GameObject.Find("InputField ScoreToWin Bronze");
         int x = int.Parse(value);
 
-        //Score cannot be negative or 0
+        //Score cannot be negative be lower than 0
         if(x <= 0)
         {
             //go.GetComponent<TMP_InputField>().text = 1.ToString();
             bronzeScoreInputField.text = 1.ToString();
             Data.scoreToWin[0] = 1;
+        }
+        else if( x >= Data.scoreToWin[1])
+        {
+            bronzeScoreInputField.text = (Data.scoreToWin[1]-1).ToString();
+            Data.scoreToWin[0] = Data.scoreToWin[1]-1;
         }
         else
         {
@@ -124,11 +129,16 @@ public class LevelMenuMangager : MonoBehaviour
     {   
         int x = int.Parse(value);
 
-        //Score cannot be negative or 0
-        if(x <= 0)
+        //Score cannot be lower than bronze's score
+        if(x <= Data.scoreToWin[0])
         {
-            silverScoreInputField.text = 1.ToString();
-            Data.scoreToWin[1] = 1;
+            silverScoreInputField.text = (Data.scoreToWin[0]+1).ToString();
+            Data.scoreToWin[1] = Data.scoreToWin[0]+1;
+        }
+        else if( x >= Data.scoreToWin[2])   //cant be higher than Gold score
+        {
+            silverScoreInputField.text = (Data.scoreToWin[2]-1).ToString();
+            Data.scoreToWin[1] = Data.scoreToWin[2]-1;
         }
         else
         {
@@ -140,10 +150,10 @@ public class LevelMenuMangager : MonoBehaviour
         int x = int.Parse(value);
 
         //Score cannot be negative or 0
-        if(x <= 0)
+        if(x <= Data.scoreToWin[1])
         {
-            goldScoreInputField.text = 1.ToString();
-            Data.scoreToWin[2] = 1;
+            goldScoreInputField.text = (Data.scoreToWin[1]+1).ToString();
+            Data.scoreToWin[2] = Data.scoreToWin[1]+1;
         }
         else
         {

@@ -102,6 +102,11 @@ public class Player : MonoBehaviour
             //if this shield was triggered by a PowerUp
             AbsorbPowerUp(go);
         }
+        else if(go.tag == "ProjectileEnemy")
+        {
+            Destroy(go);
+            Destroy(gameObject);
+        }
         else
         {
             print("Triggered by non Enemy: " +go.name);

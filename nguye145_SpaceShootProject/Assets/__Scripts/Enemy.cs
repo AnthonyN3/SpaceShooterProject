@@ -24,8 +24,8 @@ public class Enemy : MonoBehaviour
     private Color currentColor;
     private bool isRed = false;
 
-
     private GameObject deathAudio;    //used to play the enemy death audio
+    
     void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
@@ -82,6 +82,21 @@ public class Enemy : MonoBehaviour
             this.transform.position = value;
         }
     }
+
+    /* void Start()
+    {
+        Invoke("TempFire", 1f);
+    }
+
+    void TempFire()
+    {
+        GameObject projGO = Instantiate<GameObject>(projectile);
+        projGO.transform.position = transform.position;
+        Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+        rigidB.velocity = Vector3.down * 40;
+
+        Invoke("TempFire", 1f);
+    }*/
 
     void Update()
     {
